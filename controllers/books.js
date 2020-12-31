@@ -11,3 +11,13 @@ const getBooks = async () => {
     res.status(500).json({error:error.message})
   }
 }
+
+const createBook = async () => {
+  try {
+    const createdBook = new Books(req.body);
+    await createdBook.save();
+    res.status(201).json(createdBook)
+  } catch (error) {
+    res.status(500).json({error:error.message})
+  }
+}

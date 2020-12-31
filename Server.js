@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const loader = require('morgan');
+const logger = require('morgan');
 const cors = require('cors');
 const booksRoutes  = require('./routes/books')
 const PORT = process.env.PORT || 3000;

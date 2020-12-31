@@ -4,16 +4,17 @@ const { findByIdAndUpdate } = require('../models/book');
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
-const getBooks = async () => {
-  try {
-    const books = await Books.find();
-    res.json(books)
-  } catch (error) {
-    res.status(500).json({error:error.message})
-  }
+const getBooks =  (req,res) => {
+  // try {
+  //   const books = await Books.find();
+  //   res.json(books)
+  // } catch (error) {
+  //   res.status(500).json({error:error.message})
+  // }
+  res.json('GET BOOK');
 }
 
-const getBook = async (req, res) => {
+const getBook =  async (req, res) => {
   try {
       const { id } = req.params
       const book = await Books.findById(id)
@@ -24,9 +25,10 @@ const getBook = async (req, res) => {
   } catch (error) {
       res.status(500).json({ error: error.message })
   }
+ 
 }
 
-const createBook = async () => {
+const createBook = async (req,res) => {
   try {
     const createdBook = new Books(req.body);
     await createdBook.save();

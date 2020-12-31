@@ -8,10 +8,10 @@ const main = async () => {
     {
       "title": "The Origin of Life",
       "author": "Garry Li",
-      "Publisher": "Harvard university",
+      "publisher": "Harvard university",
       "category": "Science",
       "publishedYear": "1998",
-      "imgURL":"https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/3319/9781331947530.jpg"
+      "imgUrl":"https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/3319/9781331947530.jpg"
     }
   ]
   await Book.insertMany(books);

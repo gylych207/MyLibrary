@@ -5,8 +5,16 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 
-const getLoggedUser = (req, res) => {
-  res.send("GET logged in User");
+
+const getLoggedUser = async (req, res) => {
+try {
+  const user = await User.findById(req.user.id).select('-password');
+  res.json(user);
+
+} catch (error) {
+  console.log(error.message);
+  res.status(500).send('server error')
+}
 };
 
 // POST users/auth

@@ -3,6 +3,7 @@ const BookControllers = require("../controllers/books");
 const UserControllers = require("../controllers/users");
 const UserAuth = require('../controllers/auth')
 const { check, validationResult } = require("express-validator");
+const auth = require('../middleWare/auth');
 
 const router = Router();
 
@@ -30,6 +31,6 @@ router.post("/userLogin", [
   check('password','Password is Required').exists()
 ],UserAuth.userLogin);
 
-router.get("/currentUser", UserAuth.getLoggedUser);
+router.get("/currentUser",auth, UserAuth.getLoggedUser);
 
 module.exports = router;

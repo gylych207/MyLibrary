@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const BookControllers = require("../controllers/books");
 const UserControllers = require("../controllers/users");
+const UserAuth = require('../controllers/auth')
 const { check, validationResult } = require("express-validator");
 
 const router = Router();
@@ -24,7 +25,11 @@ router.post(
   ],
   UserControllers.userRegister
 );
-router.get("/userLogin", UserControllers.userLogin);
-router.get("/currentUser", UserControllers.getLoggedUser);
+router.post("/userLogin", [
+  check('email', 'Please Prowide a valid email').isEmail(),
+  check('password','Password is Required').exists()
+],UserAuth.userLogin);
+
+router.get("/currentUser", UserAuth.getLoggedUser);
 
 module.exports = router;

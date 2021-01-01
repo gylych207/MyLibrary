@@ -10,3 +10,7 @@ const Book = require('../models/book.js')
 const userBooks = () => {
   
 }
+
+module.exports = {
+  userBooks
+}

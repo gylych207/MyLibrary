@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../models/user');
 const { body, validationResult } = require('express-validator');
+const bcrypt = require('bcrypt');
 
 
 // POST library/users
@@ -25,9 +26,17 @@ const userRegister = async (req,res) => {
       password
     })
     // For now, it is not saved to database. Before That we need to hash the password
-    const salt = await bcrypt.salt
-  } catch (error) {
+    const salt = await bcrypt.genSalt(10);
+    // plain text password needs to be salted;
+    user.password = await bcrypt.hash(password, salt)
+    // Then we save to the DataBase. . Save returns a promoise so we use await
+
+    await user.save();
+    res.send('User Saved')
     
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send('Server Error')
   }
 }
 
